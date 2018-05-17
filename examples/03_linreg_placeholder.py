@@ -37,7 +37,8 @@ loss = tf.square(Y - Y_predicted, name='loss')
 
 # Step 6: using gradient descent with learning rate of 0.001 to minimize loss
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.001).minimize(loss)
-
+grad_and_var = tf.train.GradientDescentOptimizer(
+			   learning_rate=0.001).compute_gradients(loss, [w, b])
 
 start = time.time()
 writer = tf.summary.FileWriter('./graphs/linear_reg', tf.get_default_graph())
@@ -52,6 +53,7 @@ with tf.Session() as sess:
 			# Session execute optimizer and fetch values of loss
 			_, l = sess.run([optimizer, loss], feed_dict={X: x, Y:y}) 
 			total_loss += l
+		
 		print('Epoch {0}: {1}'.format(i, total_loss/n_samples))
 
 	# close the writer when you're done using it

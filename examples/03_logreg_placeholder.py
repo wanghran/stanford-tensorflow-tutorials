@@ -49,7 +49,7 @@ logits = tf.matmul(X, w) + b
 
 # Step 5: define loss function
 # use cross entropy of softmax of logits as the loss function
-entropy = tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=Y, name='loss')
+entropy = tf.nn.softmax_cross_entropy_with_logits_v2(logits=logits, labels=Y, name='loss')
 loss = tf.reduce_mean(entropy) # computes the mean over all the examples in the batch
 # loss = tf.reduce_mean(-tf.reduce_sum(tf.nn.softmax(logits) * tf.log(Y), reduction_indices=[1]))
 
